@@ -1,0 +1,26 @@
+def can_give_change(customers):
+    five_count = 0
+    ten_count = 0
+
+    for payment in customers:
+        if payment == 5:
+            five_count += 1
+        elif payment == 10:
+            if five_count > 0:
+                five_count -= 1
+                ten_count += 1
+            else:
+                return "No"
+        elif payment == 20:
+            # Try to give change with one 10 rupee note and one 5 rupee note first
+            if ten_count > 0 and five_count > 0:
+                ten_count -= 1
+                five_count -= 1
+            # If not possible, try to give change with three 5 rupee notes
+            elif five_count >= 3:
+                five_count -= 3
+            else:
+                return "No"
+
+    return "Yes"
+
